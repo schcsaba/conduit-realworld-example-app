@@ -9,7 +9,8 @@
     "test": "vitest --run",
     "lint": "eslint \"**/*.{js,jsx}\"",
     "eslint": "eslint",
-    "lint:fix": "eslint \"**/*.{js,jsx}\" --fix"
+    "lint:fix": "eslint \"**/*.{js,jsx}\" --fix",
+    "build": "ncc build index.js -o dist"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -26,6 +27,7 @@
     "sequelize-cli": "^6.6.0",
     "vitest": "^0.29.7",
     "prettier": "^3.0.2",
-    "eslint-config-prettier": "^9.0.0"
+    "eslint-config-prettier": "^9.0.0",
+    "@vercel/ncc" : "^0.36.1"
   }
 }
