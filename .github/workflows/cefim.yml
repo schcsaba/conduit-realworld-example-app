@@ -79,12 +79,12 @@ jobs:
             - name: Build backend
               run: npm run build -w backend
             - name: Tar files
-              run: tar -cvf dist-files-backend.tar backend/dist
+              run: tar -cvf dist-backend.tar backend/dist
             - name: Upload artifacts
               uses: actions/upload-artifact@v3
               with:
-                name: dist-files-backend
-                path: dist-files-backend.tar
+                name: dist-backend
+                path: dist-backend.tar
     build-frontend:
         needs: [test-backend, test-frontend]
         runs-on: ubuntu-latest
@@ -101,12 +101,12 @@ jobs:
             - name: Build frontend
               run: npm run build -w frontend
             - name: Tar files
-              run: tar -cvf dist-files-frontend.tar frontend/dist
+              run: tar -cvf dist-frontend.tar frontend/dist
             - name: Upload artifacts
               uses: actions/upload-artifact@v3
               with:
-                name: dist-files-frontend
-                path: dist-files-frontend.tar
+                name: dist-frontend
+                path: dist-frontend.tar
     release:
         needs: [build-backend, build-frontend]
         runs-on: ubuntu-latest
@@ -114,11 +114,11 @@ jobs:
             - name: Get backend build artifacts
               uses: actions/download-artifact@v3
               with:
-                name: dist-files-backend
+                name: dist-backend
             - name: Get frontend build artifacts
               uses: actions/download-artifact@v3
               with:
-                name: dist-files-frontend
+                name: dist-frontend
             - name: Output contents
               run: ls -al
             - name: release
@@ -126,5 +126,5 @@ jobs:
               if: startsWith(github.ref, 'refs/tags/')
               with:
                 files: |
-                    dist-files-backend.tar
-                    dist-files-frontend.tar
+                    dist-backend.tar
+                    dist-frontend.tar
