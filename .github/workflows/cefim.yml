@@ -10,13 +10,10 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v3
-            - name: Show npm cache dir
-              run: echo ${{ steps.npm-cache-dir.outputs.dir }}
             - name: Cache dependencies
               uses: actions/cache@v3
-              id: npm-cache
               with:
-                path: ${{ steps.npm-cache-dir.outputs.dir }}
+                path: node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
                 restore-keys: |
                   ${{ runner.os }}-node-
@@ -31,9 +28,8 @@ jobs:
             uses: actions/checkout@v3
           - name: Cache dependencies
             uses: actions/cache@v3
-            id: npm-cache
             with:
-                path: ${{ steps.npm-cache-dir.outputs.dir }}
+                path: node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
                 restore-keys: |
                   ${{ runner.os }}-node-
@@ -49,9 +45,8 @@ jobs:
               uses: actions/checkout@v3
             - name: Cache dependencies
               uses: actions/cache@v3
-              id: npm-cache
               with:
-                path: ${{ steps.npm-cache-dir.outputs.dir }}
+                path: node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
                 restore-keys: |
                   ${{ runner.os }}-node-
@@ -67,9 +62,8 @@ jobs:
               uses: actions/checkout@v3
             - name: Cache dependencies
               uses: actions/cache@v3
-              id: npm-cache
               with:
-                path: ${{ steps.npm-cache-dir.outputs.dir }}
+                path: node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
                 restore-keys: |
                   ${{ runner.os }}-node-
@@ -85,9 +79,8 @@ jobs:
               uses: actions/checkout@v3
             - name: Cache dependencies
               uses: actions/cache@v3
-              id: npm-cache
               with:
-                path: ${{ steps.npm-cache-dir.outputs.dir }}
+                path: node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
                 restore-keys: |
                   ${{ runner.os }}-node-
@@ -110,9 +103,8 @@ jobs:
               uses: actions/checkout@v3
             - name: Cache dependencies
               uses: actions/cache@v3
-              id: npm-cache
               with:
-                path: ${{ steps.npm-cache-dir.outputs.dir }}
+                path: node_modules
                 key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
                 restore-keys: |
                   ${{ runner.os }}-node-
