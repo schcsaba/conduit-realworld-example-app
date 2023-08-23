@@ -5,7 +5,7 @@ on:
         branches:
             - main
 jobs:
-    lint:
+    lint-backend:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
@@ -19,10 +19,22 @@ jobs:
               run: npm ci
             - name: Lint backend
               run: npm run lint:backend
-            - name: Lint frontend
-              run: npm run lint:frontend
-    test:
-        needs: lint
+    lint-frontend:
+      runs-on: ubuntu-latest
+      steps:
+          - name: Checkout
+            uses: actions/checkout@v3
+          - name: Cache dependencies
+            uses: actions/cache@v3
+            with:
+              path: ~/.npm
+              key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+          - name: Install dependencies
+            run: npm ci
+          - name: Lint frontend
+            run: npm run lint:frontend
+    test-backend:
+        needs: [lint-backend, lint-frontend]
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
@@ -35,9 +47,24 @@ jobs:
             - name: Install dependencies
               run: npm ci
             - name: Test code
-              run: npm run test
-    build:
-        needs: test
+              run: npm run test -w backend
+    test-frontend:
+        needs: [lint-backend, lint-frontend]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Cache dependencies
+              uses: actions/cache@v3
+              with:
+                path: ~/.npm
+                key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+            - name: Install dependencies
+              run: npm ci
+            - name: Test code
+              run: npm run test -w frontend
+    build-frontend:
+        needs: [test-backend, test-frontend]
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
