@@ -1,12 +1,16 @@
 name: 'Install NodeJS, Get & Cache Dependencies'
 description: 'Install NodeJS, get the dependencies (via npm) and cache them.'
+inputs:
+  node-version:
+    description: 'The version of node to install.'
+    required: true
 runs:
     using: "composite"
     steps:
       - name: Install NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: 20.x
+          node-version: inputs.node-version
       - name: Cache dependencies
         id: cache
         uses: actions/cache@v3
