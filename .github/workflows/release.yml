@@ -6,6 +6,7 @@ on:
             - main
         tags:
             - v**
+    workflow_call:
 jobs:
     lint-backend:
         runs-on: ubuntu-latest

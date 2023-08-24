@@ -1,0 +1,9 @@
+name: Pull request merged
+on:
+    pull_request:
+      types:
+        - closed
+jobs:
+    if_merged:
+        if: github.event.pull_request.merged == true
+        uses: ./.github/workflows/release.yml
