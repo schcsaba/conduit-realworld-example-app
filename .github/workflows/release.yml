@@ -63,8 +63,10 @@ jobs:
             - name: Build backend
               run: npm run build -w backend
             - name: Tar files
+              if: startsWith(github.ref, 'refs/tags/')
               run: tar -cvf dist-backend.tar backend/dist
             - name: Upload artifacts
+              if: startsWith(github.ref, 'refs/tags/')
               uses: actions/upload-artifact@v3
               with:
                 name: dist-backend
@@ -81,8 +83,10 @@ jobs:
             - name: Build frontend
               run: npm run build -w frontend
             - name: Tar files
+              if: startsWith(github.ref, 'refs/tags/')
               run: tar -cvf dist-frontend.tar frontend/dist
             - name: Upload artifacts
+              if: startsWith(github.ref, 'refs/tags/')
               uses: actions/upload-artifact@v3
               with:
                 name: dist-frontend
