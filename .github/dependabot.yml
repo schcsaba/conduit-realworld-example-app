@@ -4,4 +4,11 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    update-lock-files: true
+  - package-ecosystem: "npm"
+    directory: "/backend"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "daily"
